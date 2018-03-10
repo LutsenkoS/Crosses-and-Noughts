@@ -26,7 +26,11 @@ public class Player : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             if (Game.Turn == 0)
+            {
                 PlayerTurn();
+                
+            }
+
         }       
     }
     private void PlayerTurn()
@@ -46,13 +50,8 @@ public class Player : MonoBehaviour {
     }
     private void CellsValueChange(Transform hitCell)
     {
-        try
-        {
-            var key = Field.cells.Where(k => k.Value == hitCell).Select(k => k.Key).FirstOrDefault();
-            Field.cellsValue[key] = (int)GameController.Instance.playerSide;
-        }
-        catch (Exception ex)
-        { Debug.Log(ex.Message); }
+        var key = Field.cells.Where(k => k.Value == hitCell).Select(k => k.Key).FirstOrDefault();
+        Field.cellsValue[key] = (int)GameController.Instance.playerSide;
         Game.Turn = 1;
     }
 }

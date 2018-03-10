@@ -13,6 +13,10 @@ public class Game : MonoBehaviour {
     public Sprite draw;
     public GameObject hint;
 
+    public static List<List<int>> templateList = new List<List<int>>() { new List<int>(new int[3] { 0, 1, 2 }), new List<int>(new int[3] { 3, 4, 5 }),
+        new List<int>(new int[3] { 6, 7, 8 }), new List<int>(new int[3] { 0, 3, 6 }), new List<int>(new int[3] { 1, 4, 7 }),
+        new List<int>(new int[3] { 2, 5, 8 }), new List<int>(new int[3] { 0, 4, 8 }), new List<int>(new int[3] { 2, 4, 6 })};
+
     private LineRenderer line;
     public bool GameOver
     {
@@ -30,10 +34,7 @@ public class Game : MonoBehaviour {
     private int winner = -1;
     private bool gameOver;
     private List<int> winLine;
-    private List<List<int>> templateList = new List<List<int>>() { new List<int>(new int[3] { 0, 1, 2 }), new List<int>(new int[3] { 3, 4, 5 }),
-        new List<int>(new int[3] { 6, 7, 8 }), new List<int>(new int[3] { 0, 3, 6 }), new List<int>(new int[3] { 1, 4, 7 }),
-        new List<int>(new int[3] { 2, 5, 8 }), new List<int>(new int[3] { 0, 4, 8 }), new List<int>(new int[3] { 2, 4, 6 })};
-
+    
     void Start()
     {
         line = gameObject.GetComponent<LineRenderer>();
@@ -57,36 +58,36 @@ public class Game : MonoBehaviour {
 
     private void CheckWin()
     {
-        List<int> playerKeys = new List<int>();
-        List<int> AIKeys = new List<int>();
+        List<int> playerCells = new List<int>();
+        List<int> AICells = new List<int>();
         foreach (var cell in Field.cellsValue)
         {
             if (cell.Value == (int)playerSide)
-                playerKeys.Add(cell.Key);
+                playerCells.Add(cell.Key);
             else
             {
                 if (cell.Value != -1)
-                    AIKeys.Add(cell.Key);
+                    AICells.Add(cell.Key);
             }
         }
         //Debug.Log(playerKeys.Count);
-        playerKeys.Sort();
-        AIKeys.Sort();
-        if (CheckLines(playerKeys, playerSide))
+        playerCells.Sort();
+        AICells.Sort();
+        if (CheckLines(playerCells, playerSide))
             GameOver = true;
-        if (CheckLines(AIKeys, AISide))
+        if (CheckLines(AICells, AISide))
             GameOver = true;
     }
 
     private bool CheckLines(List<int> cells, Sides player )
     {
         
-        foreach (var item in templateList)
+        foreach (var template in templateList)
         {
-            if (cells.Intersect(item).Count() == item.Count())
+            if (cells.Intersect(template).Count() == template.Count())
             {
                 winner = (int)player;
-                winLine = item;
+                winLine = template;
                 return true;               
             }
         }
