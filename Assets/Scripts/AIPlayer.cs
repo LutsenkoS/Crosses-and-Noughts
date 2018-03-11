@@ -29,22 +29,16 @@ public class AIPlayer : MonoBehaviour
     {
         if (Game.Turn == 1)
         {
-            //StartCoroutine(AITurn());
             AITurn();
             //now it's player turn
             Game.Turn = 0;
-            //AITurn();
         }
     }
 
     private void AITurn()
     {
-        //yield return new WaitForSeconds(0.1f);
-        //check empty cells and fill random one
-        //Dictionary<int, int> emptyCells = new Dictionary<int, int>();
         List<int> emptyCells = new List<int>();
         List<int> playerCells = new List<int>();
-        //Dictionary<int, int> AICells = new Dictionary<int, int>();
         List<int> AICells = new List<int>();
         System.Random rand = new System.Random();
         List<int> temp = new List<int>();

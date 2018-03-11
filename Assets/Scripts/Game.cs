@@ -53,7 +53,6 @@ public class Game : MonoBehaviour {
             GameOver = true;
         if (GameOver)
             StartCoroutine(OnGameOver());
-
     }
 
     private void CheckWin()
@@ -70,7 +69,6 @@ public class Game : MonoBehaviour {
                     AICells.Add(cell.Key);
             }
         }
-        //Debug.Log(playerKeys.Count);
         playerCells.Sort();
         AICells.Sort();
         if (CheckLines(playerCells, playerSide))
@@ -80,8 +78,7 @@ public class Game : MonoBehaviour {
     }
 
     private bool CheckLines(List<int> cells, Sides player )
-    {
-        
+    {       
         foreach (var template in templateList)
         {
             if (cells.Intersect(template).Count() == template.Count())
@@ -91,8 +88,7 @@ public class Game : MonoBehaviour {
                 return true;               
             }
         }
-        return false;
-      
+        return false;      
     }
     private IEnumerator OnGameOver()
     {
@@ -112,7 +108,6 @@ public class Game : MonoBehaviour {
                 GameObject.FindGameObjectWithTag("GameOver").GetComponent<SpriteRenderer>().sprite = lose;
             else
                 GameObject.FindGameObjectWithTag("GameOver").GetComponent<SpriteRenderer>().sprite = draw;
-
     }
 
 }

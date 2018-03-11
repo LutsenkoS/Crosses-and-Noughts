@@ -11,7 +11,6 @@ public class GameController : MonoBehaviour {
     public static GameController Instance
     {
         get { return instance; }
-
     }
     public Sides playerSide
     {
@@ -31,7 +30,6 @@ public class GameController : MonoBehaviour {
         }
         instance = this;
         DontDestroyOnLoad(gameObject);
-
     }
     void Start()
     {

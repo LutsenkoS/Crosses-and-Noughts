@@ -27,15 +27,12 @@ public class Player : MonoBehaviour {
         {
             if (Game.Turn == 0)
             {
-                PlayerTurn();
-                
+                PlayerTurn();                
             }
-
         }       
     }
     private void PlayerTurn()
-    {
-        
+    {        
         clickPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         hit = Physics2D.Raycast(clickPoint, Vector2.zero);
         if (hit.collider)
